@@ -1,4 +1,4 @@
-<form action="{{ $action }}" method="POST">
+{{-- <form action="{{ $action }}" method="POST">
     @csrf
     @isset($method)
         @method($method)
@@ -7,5 +7,20 @@
         <label for="message">Message</label>
         <input type="text" name="message" id="message" value="{{ old('message', $profileDos->message ?? '') }}" required>
     </div>
+    <button type="submit">Save</button>
+</form> --}}
+
+<form action="{{ $action }}" method="POST">
+    @csrf
+    @isset($method)
+        @method($method)
+    @endisset
+
+    <div>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" value="{{ old('message', $profileDos->message ?? '') }}"
+            required>
+    </div>
+
     <button type="submit">Save</button>
 </form>
