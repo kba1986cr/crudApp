@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\ProfileDos;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
+
+
 class ProfileDosController extends Controller
 {
     // public function index()
@@ -59,5 +64,25 @@ class ProfileDosController extends Controller
     {
         $profileDos->delete();
         return redirect()->route('profileDos.index');
+    }
+
+    public function downloadPdf(ProfileDos $profileDos)
+    {
+        // if ($profileDos->user_id !== Auth::id()) {
+        //     abort(403, 'No tienes permiso para descargar el PDF de este CV.');
+        // }
+
+        // $pdf = Pdf::loadView('profileDos.pdf', compact('profileDos'));
+        // return $pdf->download('pdf' . Str::slug($profileDos->full_name) . '.pdf');
+
+        // Cargar la vista que se convertirá en PDF
+        $pdf = Pdf::loadView('profileDos.print.pdf', compact('profileDos'));
+
+        // Generar el nombre del archivo PDF utilizando el nombre completo del perfil
+        // y convertirlo a una forma apta para URLs
+        $filename = 'cv_' . Str::slug($profileDos->full_name) . '.pdf';
+
+        // Devolver el PDF al navegador para su descarga
+        return $pdf->download($filename);
     }
 }

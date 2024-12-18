@@ -22,6 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profileDos/{profileDos}/edit', [ProfileDosController::class, 'edit'])->name('profileDos.edit'); // Editar
     Route::put('/profileDos/{profileDos}', [ProfileDosController::class, 'update'])->name('profileDos.update'); // Actualizar
     Route::delete('/profileDos/{profileDos}', [ProfileDosController::class, 'destroy'])->name('profileDos.destroy'); // Eliminar
+
+    // Ruta para generar el PDF del CV
+    Route::get('/profileDos/{profileDos}/pdf', [ProfileDosController::class, 'downloadPdf'])->name('profileDos.downloadPdf');
 });
 
 
@@ -32,4 +35,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

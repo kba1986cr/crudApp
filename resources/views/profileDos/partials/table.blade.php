@@ -34,14 +34,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($profiles as $profile)
+        @foreach ($profiles as $i)
             <tr>
                 {{-- <td class="border px-4 py-2">{{ $profile->id }}</td> --}}
-                <td class="border px-4 py-2">{{ $profile->message }}</td>
+                <td class="border px-4 py-2">{{ $i->message }}</td>
                 <td class="border px-4 py-2">
-                    <a href="{{ route('profileDos.show', $profile) }}" class="text-blue-500">View</a>
-                    <a href="{{ route('profileDos.edit', $profile) }}" class="text-yellow-500 ml-2">Edit</a>
-                    <form action="{{ route('profileDos.destroy', $profile) }}" method="POST" class="inline">
+                    <a href="{{ route('profileDos.show', $i) }}" class="text-blue-500">View</a>
+                    <a href="{{ route('profileDos.edit', $i) }}" class="text-yellow-500 ml-2">Edit</a>
+                    <form action="{{ route('profileDos.destroy', $i) }}" method="POST" class="inline">
+                        <div class="mt-4 flex space-x-2">
+                            <!-- Botón para Descargar PDF -->
+                            <a href="{{ route('profileDos.downloadPdf', $i) }}"
+                                class="btn btn-primary bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                Descargar CV en PDF
+                            </a>
+                        </div>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-red-500 ml-2">Delete</button>
