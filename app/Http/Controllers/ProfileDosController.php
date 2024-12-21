@@ -72,8 +72,6 @@ class ProfileDosController extends Controller
         //     abort(403, 'No tienes permiso para descargar el PDF de este CV.');
         // }
 
-        // $pdf = Pdf::loadView('profileDos.pdf', compact('profileDos'));
-        // return $pdf->download('pdf' . Str::slug($profileDos->full_name) . '.pdf');
 
         // Cargar la vista que se convertirá en PDF
         $pdf = Pdf::loadView('profileDos.print.pdf', compact('profileDos'));
